@@ -19,9 +19,10 @@ public class Main {
     private static final String ARTICLE_AN = "an";
     private static final String ARTICLE_THE = "the";
     private static WordnetStemmer stemmer;
-    private static StanfordCoreNLP pipeline;
+    private static final StanfordCoreNLP pipeline;
 
     static {
+        System.out.println("静态方法执行了");
         // 建立 WordNet 数据库的路径
         URL url = Main.class.getClassLoader().getResource("dict");
 
@@ -43,6 +44,7 @@ public class Main {
     }
 
     public static ArrayList<ArrayList<String>> process(String passage) throws IOException {
+        System.out.println("============ nlp.output ============");
         // 创建一个 List 用于 返回
         ArrayList<ArrayList<String>> allWordsList = new ArrayList<>();
 
@@ -61,7 +63,7 @@ public class Main {
 
                 // 词性还原
                 // NLP 处理所有的动词还原，所有的名词复数
-                String targetWord = pos.contains("VB") || pos.contains("NNS") ? lemma : word;
+                String targetWord = pos.contains("VB") || pos.contains("NNS") || pos.equals("RB") ? lemma : word;
 
                 // WordNet 处理形容词比较级、最高级
                 List<String> stems;

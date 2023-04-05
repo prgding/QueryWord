@@ -37,6 +37,6 @@ public class Word {
 
 	@Override
 	public String toString() {
-		return word + "[" + ranking + ", " + pos + ']';
+		return String.valueOf(ranking);
 	}
 }
